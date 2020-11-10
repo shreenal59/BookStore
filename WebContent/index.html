@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width">
+  <meta name="description" content="Online Bookstore">
+  <meta name="keywords" content="bookstore, shopping, ecommerce, books, shop">
+  <meta name="author" content="Avery Davis">
+  <title>BookStore | Home</title>
+  <link rel="stylesheet" href="./css/stylesheet.css">
+  <script src="scripts.js"></script>
+  
+  
+</head>
+
+<body>
+  <header>
+    <div class="container">
+      <div id="branding">
+        <h1><span class="highlight">BookStore</span> Online</h1>
+      </div>
+      
+      <nav>
+        <ul>
+          <li class="current"><a href="index.html">Home</a></li>
+          <li><a href="login.html" id = "log">Login</a></li>
+          <li><a href="register.jsp" id = "register">Register</a></li>
+          <li><a href="shoppingcart.html">Shopping Cart</a></li>
+          <li><a href="profile.html" id="session">Profile</a></li>
+          <li><input type="text" placeholder="Search..."></li>
+          <li><button type="submit" class="search_button" onclick="window.location.href='search.html';">Search</button>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  
+  <script>
+        var cookie = getCookie("uname");
+        if (cookie == null) {
+        } else {
+          document.getElementById('session').innerHTML = cookie;
+          document.getElementById('log').innerHTML = "Log Out";
+          document.getElementById("register").innerHTML = "";
+        }
+    </script>
+
+  <section id="showcase">
+    <div class="container">
+      <h1>BookStore Online</h1>
+    </div>
+  </section>
+
+  <section id="boxes">
+    <div class="container">
+      <h2>Featured Books</h2>
+      <div class="box">
+        <img src="./img/books/Ayn Rand - The Fountainhead.jpeg">
+        <h3>Ayn Rand - The Fountainhead</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus mi augue, viverra sit amet ultricies</p>
+        <div class="popup" onclick="myPopup()">Show Details
+          <span class="popuptext" id="myPopup">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus mi augue, viverra sit amet ultricies</span>
+        </div>
+        <script>
+          // When the user clicks on div, open the popup
+          function myPopup() {
+            var popup = document.getElementById("myPopup");
+            popup.classList.toggle("show");
+          }
+        </script>
+      </div>
+      <div class="box">
+        <img src="./img/books/Haruki Murakami - Norwegian Wood.jpeg">
+        <h3>Haruki Murakami - Norwegian Wood</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus mi augue, viverra sit amet ultricies</p>
+        <div class="popup" onclick="myPopup()">Show Details
+          <span class="popuptext" id="myPopup">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus mi augue, viverra sit amet ultricies</span>
+        </div>
+      </div>
+      <div class="box">
+        <img src="./img/books/William Gibson - Neuromancer.jpeg">
+        <h3>William Gibson - Neuromancer</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus mi augue, viverra sit amet ultricies</p>
+        <div class="popup" onclick="myPopup()">Show Details
+          <span class="popuptext" id="myPopup">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus mi augue, viverra sit amet ultricies</span>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <h2>Best Sellers</h2>
+      <div class="box">
+        <img src="./img/books/Ayn Rand - The Fountainhead.jpeg">
+        <h3>Ayn Rand - The Fountainhead</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus mi augue, viverra sit amet ultricies</p>
+        <div class="popup" onclick="myPopup()">Show Details
+          <span class="popuptext" id="myPopup">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus mi augue, viverra sit amet ultricies</span>
+        </div>
+        <script>
+          // When the user clicks on div, open the popup
+          function myPopup() {
+            var popup = document.getElementById("myPopup");
+            popup.classList.toggle("show");
+          }
+        </script>
+      </div>
+      <div class="box">
+        <img src="./img/books/Haruki Murakami - Norwegian Wood.jpeg">
+        <h3>Haruki Murakami - Norwegian Wood</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus mi augue, viverra sit amet ultricies</p>
+        <div class="popup" onclick="myPopup()">Show Details
+          <span class="popuptext" id="myPopup">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus mi augue, viverra sit amet ultricies</span>
+        </div>
+      </div>
+      <div class="box">
+        <img src="./img/books/William Gibson - Neuromancer.jpeg">
+        <h3>William Gibson - Neuromancer</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus mi augue, viverra sit amet ultricies</p>
+        <div class="popup" onclick="myPopup()">Show Details
+          <span class="popuptext" id="myPopup">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus mi augue, viverra sit amet ultricies</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>CSCI4050 Team 9, Copyright &copy; 2020</p>
+  </footer>
+</body>
+
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width">
+  <meta name="description" content="Online Bookstore">
+  <meta name="keywords" content="bookstore, shopping, ecommerce, books, shop">
+  <meta name="author" content="Avery Davis">
+  <title>Admin | ManageBooks</title>
+  <link rel="stylesheet" href="./css/adminstylesheet.css">
+  <script src="scripts.js"></script>
+</head>
+
+<body>
+  <header>
+    <div class="container">
+      <div id="branding">
+        <h1><span class="highlight">BookStore</span> Online Admin Portal</h1>
+      </div>
+    </div>
+  </header>
+
+  <div id="mySidenav" class="sidenav">
+    <a href="admin.html">Dashboard</a>
+    <a href="managebooks.html">Manage Books</a>
+    <a href="#">Manage Promotions</a>
+    <a href="#">Manage Users</a>
+    <a href="index.html">Logout</a>
+  </div>
+
+
+  <!-- Add all page content inside this div if you want the side nav to push page content to the right (not used if you only want the sidenav to sit on top of the page -->
+  <div id="main">
+    <h2>Manage Books</h2>
+    <hr>
+    <h4>Book Catalog</h4>
+    <div style="overflow-x:auto;">
+      <table>
+        <th>Serial #</th>
+        <th>Book Title</th>
+        <th>Author</th>
+        <th>MSRP</th>
+        <th>In Stock</th>
+        <th>Purchased</th>
+        <th>Returned</th>
+        </tr>
+        <tr>
+          <td>AR001</td>
+          <td>The Fountainhead</td>
+          <td>Ayn Rand</td>
+          <td>$12.00</td>
+          <td>100</td>
+          <td>50</td>
+          <td>1</td>
+        </tr>
+        <tr>
+          <td>HM001</td>
+          <td>Norwegian Wood</td>
+          <td>Haruki Murakami</td>
+          <td>$14.00</td>
+          <td>100</td>
+          <td>94</td>
+          <td>8</td>
+        </tr>
+        <tr>
+          <td>WG001</td>
+          <td>Neuromancer</td>
+          <td>William Gibson</td>
+          <td>$14.00</td>
+          <td>100</td>
+          <td>67</td>
+          <td>3</td>
+        </tr>
+        <tr>
+          <td>HM002</td>
+          <td>Moby Dick</td>
+          <td>Herman Melville</td>
+          <td>$12.00</td>
+          <td>100</td>
+          <td>30</td>
+          <td>2</td>
+      </table>
+    </div>
+    <hr>
+    <div class="admintool" id="addBook">
+      <label for="newbook" class="input-label"> <b>Add New Book</b></label>
+      <br>
+      <input type="text" class="title" placeholder="Title" required>
+      <input type="text" class="author" placeholder="Author Full Name" required>
+      <input type="text" class="title" placeholder="Stock on Hand" required>
+      <input type="text" class="title" placeholder="MSRP" required>
+      <br>
+      <button type="submit" class="Add">Add New Book</button>
+    </div>
+    <hr>
+    <div class="adminTool" id="editBook">
+      <label for="newbook" class="input-label"> <b>Edit Existing Book</b></label>
+      <br>
+      <input type="text" class="Serial" placeholder="Serial" required>
+      <input type="text" class="title" placeholder="Title">
+      <input type="text" class="author" placeholder="Author Full Name">
+      <input type="text" class="title" placeholder="Stock on Hand">
+      <input type="text" class="title" placeholder="MSRP">
+      <br>
+      <button type="submit" class="adminTool">Submit Changes</button>
+    </div>
+    <hr>
+    <div class="adminTool" id="deleteBook">
+      <label for="newbook" class="input-label"> <b>Delete Existing Book</b></label>
+      <br>
+      <input type="text" class="adminTool" placeholder="Serial" required>
+      <br>
+      <button type="submit" class="adminTool">Delete</button>
+    </div>
+
+  </div>
+
+
+  </div>
+  <script>
+
+  </script>
+</body>
+
+</html>

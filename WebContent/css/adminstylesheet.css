@@ -1,0 +1,103 @@
+body{
+  font: 15px/1.5 Arial, Helvetica,sans-serif;
+  padding:0;
+  padding-left: 160px;
+  margin:0;
+  background-color:#f4f4f4;
+}
+
+/* Global */
+.container{
+  width:100%;
+  margin:auto;
+  overflow:hidden;
+}
+
+/* Header */
+header{
+  background:#111;
+  color:#ffffff;
+  padding-top:20px;
+  min-height:70px;
+  border-bottom:#e8491d 3px solid;
+}
+
+header .highlight, header .current a{
+  color:#e8491d;
+  font-weight:bold;
+}
+
+/* Right Sidebar */
+aside#sidebar{
+  float:right;
+  width:30%;
+  margin-top:10px;
+}
+
+aside#sidebar .quote input, aside#sidebar .quote textarea{
+  width:90%;
+  padding:5px;
+}
+
+/* Main-col */
+article#main-col{
+  float:left;
+  width:65%;
+}
+
+footer{
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding:5px;
+  margin-top:10px;
+  color:#ffffff;
+  background-color:#111;
+  text-align: center;
+  border-top:#e8491d 3px solid;
+}
+
+/* Left Menu Sidebar */
+.sidenav {
+  height: 100%;
+  width: 160px;
+  position: fixed;
+  z-index: 0;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  padding-top: 100px;
+}
+
+.sidenav a {
+  padding: 16px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #f4f4f4;
+  display: block;
+}
+
+.sidenav a:hover {
+  color: #e8491d;
+}
+
+#main {
+  margin-left: 10px; /* Same as the width of the sidenav */
+  font-size: 20px; /* Increased text to enable scrolling */
+  padding: 0px 10px;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+  border: 1px solid #ddd;
+}
+
+th, td {
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even){background-color: lightgray}

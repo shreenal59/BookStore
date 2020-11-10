@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="description" content="Online Bookstore">
+<meta name="keywords"
+content="bookstore, shopping, ecommerce, books, shop">
+<meta name="author" content="Shreenal Patel">
+<title>BookStore | Order Conformation</title>
+<link rel="stylesheet" href="./css/stylesheet.css">
+<link rel="stylesheet" href="./css/checkoutstyle.css">
+<script src="scripts.js"></script>
+</head>
+
+<body>
+<header>
+    <div class="container">
+      <div id="branding">
+        <h1><span class="highlight">BookStore</span> Online</h1>
+      </div>
+  	  <nav>
+        <ul>
+          <li class="current"><a href="index.html">Home</a></li>
+          <li><a href="login.html" id = "log">Login</a></li>
+          <li><a href="register.jsp" id = "register">Register</a></li>
+          <li><a href="shoppingcart.html">Shopping Cart</a></li>
+          <li><a href="profile.html" id="session">Profile</a></li>
+          <li><input type="text" placeholder="Search..."></li>
+          <li><button type="submit" class="search_button" onclick="window.location.href='search.html';">Search</button>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  
+  <script>
+        var cookie = getCookie("uname");
+        if (cookie == null) {
+        	document.window = "login.html";
+        } else {
+          document.getElementById('session').innerHTML = cookie;
+          document.getElementById('log').innerHTML = "Log Out";
+          document.getElementById("register").innerHTML = "";
+        }
+  </script>
+
+<section id="main">
+    <div class="container" style="min-height: 370px;">
+        <h1 class="page-title">My Orders</h1>
+    <div class="item">
+        <div class="cover">
+            <img src="./img/books/Ayn Rand - The Fountainhead.jpeg">
+        </div>
+        <div class="detail">
+            <p>Ayn Rand - The Fountainhead</p>
+        </div>
+        <div class="detail">
+            <p>Order Date: 09/29/20</p>
+        </div>
+        <div class="detail">
+            <p>$10.99</p>
+        </div>
+        <div class="button">
+            <form action="./shoppingcart.html">
+                <p><button class="button_3">Reorder</button></p>
+            </form>
+
+        </div>
+        <div class="button">
+            <form action="./return.html">
+                <p><button class="button_3">Return</button></p>
+            </form>
+        </div>
+
+    </div>
+
+    <div class="item">
+        <div class="cover">
+            <img src="./img/books/Haruki Murakami - Norwegian Wood.jpeg">
+        </div>
+        <div class="detail">
+            <p>Haruki Murakami - Norwegian Wood</p>
+        </div>
+        <div class="detail">
+            <p>Order Date: 09/29/20</p>
+        </div>
+        <div class="detail">
+            <p>$9.99</p>
+        </div>
+        <div class="button">
+            <form action="./shoppingcart.html">
+                <p><button class="button_3">Reorder</button></p>
+            </form>
+
+        </div>
+        <div class="button">
+            <form action="./return.html">
+                <p><button class="button_3">Return</button></p>
+            </form>
+        </div>
+
+    </div>
+
+    <div class="item">
+        <div class="cover">
+            <img src="./img/books/William Gibson - Neuromancer.jpeg">
+        </div>
+        <div class="detail">
+            <p>William Gibson - Neuromancer</p>
+        </div>
+        <div class="detail">
+            <p>Order Date: 09/29/20</p>
+        </div>
+        <div class="detail">
+            <p>$11.99</p>
+        </div>
+        <div class="button">
+            <form action="./shoppingcart.html">
+                <p><button class="button_3">Reorder</button></p>
+            </form>
+
+        </div>
+        <div class="button">
+            <form action="./return.html">
+                <p><button class="button_3">Return</button></p>
+            </form>
+        </div>
+
+    </div>
+
+
+    </div>
+
+    
+</section>
+
+<footer>
+<p>CSCI4030 Team X, Copyright &copy; 2020</p>
+</footer>
+</body>
+
+</html>

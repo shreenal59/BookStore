@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="description" content="Online Bookstore">
+<meta name="keywords"
+  content="bookstore, shopping, ecommerce, books, shop">
+<meta name="author" content="Avery Davis, Shreenal Patel">
+<title>BookStore | Search</title>
+
+<link rel="stylesheet" href="./css/checkoutstyle.css">
+<script src="scripts.js"></script>
+</head>
+
+<body>
+  <header>
+    <div class="container">
+      <div id="branding">
+        <h1><span class="highlight">BookStore</span> Online</h1>
+      </div>
+  	  <nav>
+        <ul>
+          <li class="current"><a href="index.html">Home</a></li>
+          <li><a href="login.html" id = "log">Login</a></li>
+          <li><a href="register.jsp" id = "register">Register</a></li>
+          <li><a href="shoppingcart.html">Shopping Cart</a></li>
+          <li><a href="profile.html" id="session">Profile</a></li>
+          <li><input type="text" placeholder="Search..."></li>
+          <li><button type="submit" class="search_button" onclick="window.location.href='search.html';">Search</button>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  
+  <script>
+        var cookie = getCookie("uname");
+        if (cookie == null) {
+        	
+        } else {
+          document.getElementById('session').innerHTML = cookie;
+          document.getElementById('log').innerHTML = "Log Out";
+          document.getElementById("register").innerHTML = "";
+        }
+  </script>
+
+    <section id="main">
+      <div class="container">
+        <h1 class="page-title">Search Results</h1>
+        <h3 class="Results">Results found: 1</h3>
+        <div class="item">
+          <div class="cover">
+            <img src="./img/books/Ayn Rand - The Fountainhead.jpeg">
+          </div>
+          <div class="description">
+            <p>Ayn Rand - The Fountainhead</p>
+          </div>
+          <div class="quantity">
+            <p>
+              <input type="button" value="View Book" name="View">
+            </p>
+          </div>
+          <div class="price">
+            <p>$10.99</p>
+          </div>
+        </div>
+      
+    </section>
+
+<footer>
+  <p>CSCI4050 Team 9, Copyright &copy; 2020</p>
+</footer>
+</body>
+
+</html>

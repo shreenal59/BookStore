@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width">
+  <meta name="description" content="Online Bookstore">
+  <meta name="keywords" content="bookstore, shopping, ecommerce, books, shop">
+  <meta name="author" content="Avery Davis">
+  <title>BookStore | User Self Service</title>
+  <link rel="stylesheet" href="./css/stylesheet.css">
+  <script src="scripts.js"></script>
+</head>
+
+<body>
+    <header>
+      <div class="container">
+        <div id="branding">
+          <h1><span class="highlight">BookStore</span> Online</h1>
+        </div>
+        <nav>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            
+            <li class="current"><a href="login.html">Login</a></li>
+            <li><a href="register.jsp">Register</a></li>
+            <li><a href="shoppingcart.html">Shopping Cart</a></li>
+            <li><a href="profile.html">Profile</a></li>
+            <li><input type="text" placeholder="Search..."></li>
+            <li><button type="submit" class="search_button" onclick="window.location.href='search.html';">Search</button></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+  
+    
+    <section id="sec-reg-log">
+      <div class="container">
+        <main id="main-reg-log">
+        <article id="art-reg-log">
+          <h1 class="page-title">Forgot User Name or Password</h1>
+          <form action="GetEmail" method="post">
+          <p>Please enter your account information to get the User Name and Password.</p>
+          <hr>
+  
+          <label for="email" class="reg-label"><b>Email</b></label>
+          <input type="text" placeholder="Enter Your Email" name="email" id="email" required>
+  
+  
+          <hr>
+  
+          <button type="submit" class="submitbtn">Get My User Name/Password</button>
+          </form>
+        </article>
+      </main>
+  
+      </div>
+    </section>
+  
+    <footer>
+      <p>CSCI4050 Team 9, Copyright &copy; 2020</p>
+    </footer>
+  </body>
+
+</html>

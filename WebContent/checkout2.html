@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width">
+  <meta name="description" content="Online Bookstore">
+  <meta name="keywords"
+    content="bookstore, shopping, ecommerce, books, shop">
+  <meta name="author" content="Shreenal Patel">
+  <title>BookStore | Checkout</title>
+  <link rel="stylesheet" href="./css/checkoutstyle.css">
+  <script src="scripts.js"></script>
+</head>
+
+<body>
+  <header>
+    <div class="container">
+      <div id="branding">
+        <h1><span class="highlight">BookStore</span> Online</h1>
+      </div>
+  	  <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="login.html" id = "log">Login</a></li>
+          <li><a href="register.jsp" id = "register">Register</a></li>
+          <li><a href="shoppingcart.html" class="current" >Shopping Cart</a></li>
+          <li><a href="profile.html" id="session">Profile</a></li>
+          <li><input type="text" placeholder="Search..."></li>
+          <li><button type="submit" class="search_button" onclick="window.location.href='search.html';">Search</button>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  
+  <script>
+        var cookie = getCookie("uname");
+        if (cookie == null) {
+        	document.window = "login.html";
+        } else {
+          document.getElementById('session').innerHTML = cookie;
+          document.getElementById('log').innerHTML = "Log Out";
+          document.getElementById("register").innerHTML = "";
+        }
+  </script>
+
+  <section id="main">
+    
+    <div class="container" >
+      <div id="main_con">
+      <h1 class="page-title">Conformation</h1><br>
+      <div>
+        <div class="twoboxes">
+          <div class="box">
+        <h4>Billing Address</h4>
+        <p>Jin Mori</p>
+        <p>981 Yukon Road</p>
+        <p>Spring Hill, GA 34608</p>
+        <br>
+      </div>
+      <div class="box">
+        <h4>Shipping Address</h4>
+        <p>Jin Mori</p>
+        <p>981 Yukon Road</p>
+        <p>Spring Hill, GA 34608</p>
+        <br>
+      </div>
+      </div>
+        <h4>Payment Info</h4>
+        <p>Card Ending  in 2187</p>
+        <br>
+        <div class="twoboxes">
+          <div class="box">
+        <form action="./checkout1.html">
+          <button type="submit" class="button_2">Edit Personal Info</button>
+        </form>
+      </div>
+      <div class="box">
+        <form action="./orderConformation.html">
+          <button type="submit" class="button_2">Checkout</button>
+        </form>
+      </div>
+      </div>
+      </div>
+      
+    </div>
+
+    <div id="side_bar" class="dark">
+      <h3 style="margin-left: 3em;">Order Summary</h3>
+      <label for="cost">Original Price:</label>$32.97 <br>
+      <label for="tax">Estimated Sales Tax:</label>$2.3 <br>
+      <label for="cvc">Order Total:</label>$35.27 <br>
+      <br>
+      <form action="./shoppingcart.html">
+        <button type="submit" class="button_2">Edit or View Cart</button>
+      </form>
+    </div>
+
+  </div>
+    
+  </section>
+
+  <footer>
+    <p>CSCI4050 Team 9, Copyright &copy; 2020</p>
+  </footer>
+</body>
+
+</html>
