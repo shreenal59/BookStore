@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page import="java.sql.*" %>
 <!DOCTYPE html>
 <html>
 
@@ -9,10 +12,20 @@
   <meta name="author" content="Avery Davis">
   <title>Admin | Dashboard</title>
   <link rel="stylesheet" href="./css/adminstylesheet.css">
-  <script src="./js/scritps.js"></script>
+  <script src="scritps.js"></script>
 </head>
 
 <body>
+
+  <%
+  	Class.forName("com.mysql.jdbc.Driver");
+	Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/bookstore","root","4122");
+    String userQuery = "SELECT user_id, first_name, last_name, User_Type FROM bookstore.user;";
+	Statement st = con.createStatement();
+	ResultSet rs =st.executeQuery(userQuery);
+	Statement st2 = con.createStatement();
+	
+  %>
   <header>
     <div class="container">
       <div id="branding">
@@ -22,10 +35,10 @@
   </header>
 
   <div id="mySidenav" class="sidenav">
-    <a href="admin.html">Dashboard</a>
+    <a href="admin.jsp">Dashboard</a>
     <a href="managebooks.html">Manage Books</a>
     <a href="managePromotions.html">Manage Promotions</a>
-    <a href="manageUsers.html">Manage Users</a>
+    <a href="manageUsers.jsp">Manage Users</a>
     <a href="index.html">Logout</a>
   </div>
 
@@ -110,8 +123,42 @@
       </div>
     </div>
     <div class="tables" id="usersTable">
-      <h4>New Users</h4>
+      <h4>Users</h4>
       <div style="overflow-x:auto;">
+      	<table>
+        <tr>
+          <th>User ID</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>User Type</th>
+          <th>Customer Status</th>
+        </tr>
+        <% while(rs.next()) { 
+        	String userID = rs.getString(1);
+        %>
+        <tr>
+          <td> <%= userID %> </td>
+          <td> <%= rs.getString(2) %> </td>
+          <td> <%= rs.getString(3) %> </td>
+          <% String userType = rs.getString(4); %>
+          <td> <%= userType %> </td>
+          <% 
+          	String query2 = "SELECT status FROM bookstore.customer WHERE user_id='" + userID + "';";
+          	if (userType.equals("C")) {
+          		ResultSet rs2 = st2.executeQuery(query2);
+          		rs2.next();
+          		String status = rs2.getString(1);
+          	%>
+          	<td> <%= status %> </td>
+          	<% 
+ 				
+          	} else {
+          	%>
+          	<td> </td>
+          	<% } %>
+        </tr>
+		<% } %>
+      </table>
         <!--
         <table>
           <tr>

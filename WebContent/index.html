@@ -38,6 +38,10 @@
   
   <script>
         var cookie = getCookie("uname");
+        var userType = getCookie("userType");
+        if(!(userType == null)) {
+        	deleteCookie("userType");
+        }
         if (cookie == null) {
         } else {
           document.getElementById('session').innerHTML = cookie;

@@ -12,7 +12,7 @@
   <meta name="author" content="Avery Davis">
   <title>Admin | Users</title>
   <link rel="stylesheet" href="./css/adminstylesheet.css">
-  <script src="./js/scritps.js"></script>
+  <script src="scripts.js"></script>
 </head>
 
 <body>
@@ -27,6 +27,19 @@
   
   
   %>
+  
+  <script>
+        
+        var userType = getCookie("userType");
+        if(userType == "A") {
+        	
+        } else {
+        	alert ('Only Admin can access Manage Users');
+        	window.location = "admin.jsp";
+        }
+        
+    </script>
+    
   <header>
     <div class="container">
       <div id="branding">
@@ -36,10 +49,10 @@
   </header>
 
   <div id="mySidenav" class="sidenav">
-    <a href="admin.html">Dashboard</a>
+    <a href="admin.jsp">Dashboard</a>
     <a href="managebooks.html">Manage Books</a>
     <a href="managePromotions.html">Manage Promotions</a>
-    <a href="manageUsers.html">Manage Users</a>
+    <a href="manageUsers.jsp">Manage Users</a>
     <a href="index.html">Logout</a>
   </div>
 
@@ -91,7 +104,7 @@
       <label for="manage users" class="input-label"> <b>Manage Users</b></label>
       <br> <!--Book Table-->
       <form action="manageUserServlet" method="post">
-        <input type="text" class="userid" name="userID" placeholder="User ID">
+        <input type="text" class="userid" name="userID" placeholder="User ID" required>
         <select name="userType" id="userType">
           <option value="select" disabled>Select User Action</option>
           <option value="s">Suspend a Customer</option>
