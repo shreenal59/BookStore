@@ -33,6 +33,7 @@ public class Login extends HttpServlet {
         String query3 = "SELECT email_address, bookstore.user.user_id FROM bookstore.customer inner join bookstore.user on bookstore.user.user_id = bookstore.customer.user_id;";
         String userType = "";
         String query4 = "";
+        String query7 = "SELECT * FROM bookstore.customer WHERE user_id = '" + uname + "' OR email_address = '"+ uname +"';";
         
         boolean valid = false;
         try {
@@ -43,6 +44,40 @@ public class Login extends HttpServlet {
 			Statement st2 = con.createStatement();
 			ResultSet rs2 = st2.executeQuery(query2);
 			Statement st4 = con.createStatement();
+			
+			Statement st7 = con.createStatement();
+			ResultSet rs7 = st7.executeQuery(query7);
+			boolean firstTime = false;
+			
+			if (rs7.next()) {
+				String sta = rs7.getString(5);
+				uname = rs7.getString(2);
+				
+				if (sta.equals("I")) {
+					firstTime = true;
+					String verCode = rs7.getString(6);
+					if(verCode.equals(pass)) {
+						String query8 = "Update bookstore.customer set status = 'A' where user_id='"+ uname + "';";
+						Statement st8 = con.createStatement();
+						st8.executeUpdate(query8);
+						Cookie cookie = new Cookie("uname", uname);
+		    			response.addCookie(cookie);
+		    			out.println("<script>");
+			            out.println("alert('First time login is successful. Now you can use your password to login.');");
+			            out.println("</script>");
+		        		RequestDispatcher rd = request.getRequestDispatcher("index.html");
+		                rd.include(request, response);
+					} else {
+						out.println("<script>");
+			            out.println("alert('Your verification code is incorrect, Try again');");
+			            out.println("</script>");
+			        	RequestDispatcher rd = request.getRequestDispatcher("login.html");
+			            rd.include(request, response);
+					}
+				}
+				
+			}
+			
 			
 			while(rs.next() && !valid) {
 				if (rs.getString(1).equalsIgnoreCase(uname) && rs.getString(2).equals(pass)) {
@@ -66,6 +101,8 @@ public class Login extends HttpServlet {
 					}
 				}
 			}
+			
+			
 
 	        if (valid) {
 	        	if (userType.equals("C")) {
@@ -91,7 +128,7 @@ public class Login extends HttpServlet {
 		        	RequestDispatcher rd = request.getRequestDispatcher("login.html");
 		            rd.include(request, response);
 	        	} 
-	        } else {
+	        } else if(!firstTime) {
 	        	out.println("<script>");
 	            out.println("alert('Email or password incorrect, Try again');");
 	            out.println("</script>");
