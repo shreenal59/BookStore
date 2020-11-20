@@ -42,17 +42,12 @@ public class AddBook extends HttpServlet {
 		String msrp = request.getParameter("MSRP");
 		String status = request.getParameter("Book Status");
 		String image = "default.jpg";
-
-		
-		System.out.println(status);
-//		System.out.println(category);
-//		System.out.println(title);
 		
 		try {
 
-			Class.forName("com.mysql.jdbc.Driver");
+			//Class.forName("com.mysql.jdbc.Driver");
 			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/bookstore", "root", "4122");
-			//Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Bookstore", "root", "lkjhlkjh");
+			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Bookstore", "root", "lkjhlkjh");
 			Statement st = con.createStatement();
 			
 			ResultSet rsI = st.executeQuery("SELECT * from Book where isbn='" + isbn + "'");
@@ -98,13 +93,9 @@ public class AddBook extends HttpServlet {
 				psI.setDouble(3, Double.parseDouble(msrp));
 				psI.setString(4, status);
 				
-				
 				ps.executeUpdate();
 				psA.executeUpdate();
 				psI.executeUpdate();
-				//out.println("<script><p>");
-				//out.println("ISBN = " + isbn);
-				//out.println("</p></script>");
 				
 				out.println("<script>");
 				out.println(
