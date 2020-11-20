@@ -60,8 +60,8 @@ public class EditBook extends HttpServlet {
 		try {
 
 			Class.forName("com.mysql.jdbc.Driver");
-			//Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/bookstore", "root", "4122");
-			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Bookstore", "root", "lkjhlkjh");
+			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/bookstore", "root", "4122");
+			//Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Bookstore", "root", "lkjhlkjh");
 			Statement st = con.createStatement();
 
 			ResultSet rsI = st.executeQuery("SELECT * from Book where isbn='" + isbn + "'");
