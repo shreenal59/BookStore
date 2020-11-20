@@ -1,12 +1,16 @@
 package com.bookstore;
 
 import java.io.*;
+
+import javax.mail.MessagingException;
+import javax.mail.internet.AddressException;
 import javax.servlet.*;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.sql.*;
 import java.util.Date;
 import java.text.*;
+
 
 @WebServlet("/addPromotion") 
 public class AddPromotionServlet extends HttpServlet{
@@ -18,9 +22,10 @@ public class AddPromotionServlet extends HttpServlet{
 		response.setContentType("text/html;charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		
-		String promoCode = "";
+		String promoCode = null;
 		promoCode = request.getParameter("promo_code");
-		int percentage = Integer.parseInt(request.getParameter("quantity"));
+		int percentage = 0;
+		percentage = Integer.parseInt(request.getParameter("quantity"));
 		
 		Date startDate = null;
 		try {
@@ -50,13 +55,20 @@ public class AddPromotionServlet extends HttpServlet{
 					exists = true;
 				}
 			}
-			
-			if(exists) {
+			if(promoCode == null || percentage == 0 || startDate == null || endDate == null) {
+				out.println("<script>");
+	            out.println("alert('One or more fields blank, please try again');");
+	            out.println("</script>");
+	            
+	            RequestDispatcher rd = request.getRequestDispatcher("managePromotions.jsp");
+				rd.include(request, response);
+			}
+			else if(exists) {
 				out.println("<script>");
 	            out.println("alert('Promo code already exists, Try again');");
 	            out.println("</script>");
 	            
-	            RequestDispatcher rd = request.getRequestDispatcher("managePromotions.html");
+	            RequestDispatcher rd = request.getRequestDispatcher("managePromotions.jsp");
 				rd.include(request, response);
 			}
 			
@@ -65,7 +77,7 @@ public class AddPromotionServlet extends HttpServlet{
 	            out.println("alert('Invalid percentage, Try again');");
 	            out.println("</script>");
 	            
-	            RequestDispatcher rd = request.getRequestDispatcher("managePromotions.html");
+	            RequestDispatcher rd = request.getRequestDispatcher("managePromotions.jsp");
 				rd.include(request, response);
 			}
 			
@@ -75,7 +87,7 @@ public class AddPromotionServlet extends HttpServlet{
 	            out.println("alert('Start Date is after End Date, Try again');");
 	            out.println("</script>");
 	            
-	            RequestDispatcher rd = request.getRequestDispatcher("managePromotions.html");
+	            RequestDispatcher rd = request.getRequestDispatcher("managePromotions.jsp");
 				rd.include(request, response);
 			}
 			
@@ -96,14 +108,34 @@ public class AddPromotionServlet extends HttpServlet{
 				int i = ps.executeUpdate();
 
 				out.println("<script>");
-	            out.println("alert('Added Promotion');");
+	            out.println("alert('Added Promotion, emailing subscribed users now.');");
 	            out.println("</script>");
 	            
-	            RequestDispatcher rd = request.getRequestDispatcher("managePromotions.html");
-				rd.include(request, response);
+	            String host = "smtp.gmail.com";
+				String port = "587";
+				String emailId = "bookstore9c@gmail.com";
+				String password = "Bookpassword9C";
+	            String subject = "Promotion Alert!";
+	            String message = "You are receiving this email because you subscribed to our Bookstore webiste.\r\n "
+	            		+ "Use promo code " + promoCode + " to receive " + percentage + "% off your next order.\r\n"
+	            		+ "Offer valid between " + startDate.toString() + " and " + endDate.toString();
+	            rs = st.executeQuery("SELECT email_address, subscription FROM customer;");
+	            String toAddress = "";
+	            while(rs.next()) {
+	            	if(rs.getInt(2) == 1) {
+	            		toAddress = rs.getString(1);
+	            		try {
+	            			EmailUtility.sendEmail(host, port, emailId, password, toAddress, subject, message);
+	            		} catch(AddressException e) {
+	            			e.printStackTrace();
+	            		} catch(MessagingException e) {
+	            			e.printStackTrace();
+	            		}
+	            	}
+	            }
 	            
-	            System.out.println(promoID + " " + promoCode + " " + percentage + " " + sqlStartDate.toString() + " " + sqlEndDate.toString());
-	            
+	            RequestDispatcher rd = request.getRequestDispatcher("managePromotions.jsp");
+				rd.include(request, response);	               	            
 				
 			}
 				
@@ -112,3 +144,4 @@ public class AddPromotionServlet extends HttpServlet{
 		}
 	}
 }
+
