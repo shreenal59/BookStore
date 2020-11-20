@@ -37,7 +37,7 @@
   <div id="mySidenav" class="sidenav">
     <a href="admin.jsp">Dashboard</a>
     <a href="managebooks.jsp">Manage Books</a>
-    <a href="managePromotions.html">Manage Promotions</a>
+    <a href="managePromotions.jsp">Manage Promotions</a>
     <a href="manageUsers.jsp">Manage Users</a>
     <a href="index.html">Logout</a>
   </div>

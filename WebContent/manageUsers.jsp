@@ -50,8 +50,8 @@
 
   <div id="mySidenav" class="sidenav">
     <a href="admin.jsp">Dashboard</a>
-    <a href="managebooks.html">Manage Books</a>
-    <a href="managePromotions.html">Manage Promotions</a>
+    <a href="managebooks.jsp">Manage Books</a>
+    <a href="managePromotions.jsp">Manage Promotions</a>
     <a href="manageUsers.jsp">Manage Users</a>
     <a href="index.html">Logout</a>
   </div>
@@ -98,6 +98,9 @@
 		<% } %>
       </table>
       
+      <p>(User Type: A = Admin; E = Employee; C = Customer)</p>
+      <p>(Customer Status: A = Active; I = Inactive; S = Suspended)</p>
+      
     </div>
     <hr>
     <div class="admintool" id="addBook">
@@ -110,13 +113,14 @@
           <option value="s">Suspend a Customer</option>
           <option value="us">Unsuspend a Customer</option>
           <option value="a">Promote a User to Admin</option>
-          <option value="ua">Depromote Admin to User</option>
+          <option value="ua">Depromote Admin/Employee to User</option>
           <option value="e">Change User type to Employee</option>
           
         </select>
 
         <button type="submit" class="change">Change User Status</button>
       </form>
+      <br>
     </div>
 
   </div>

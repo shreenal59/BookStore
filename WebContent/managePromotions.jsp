@@ -35,10 +35,10 @@
   </header>
 
   <div id="mySidenav" class="sidenav">
-    <a href="admin.html">Dashboard</a>
-    <a href="managebooks.html">Manage Books</a>
-    <a href="managePromotions.html">Manage Promotions</a>
-    <a href="manageUsers.html">Manage Users</a>
+    <a href="admin.jsp">Dashboard</a>
+    <a href="managebooks.jsp">Manage Books</a>
+    <a href="managePromotions.jsp">Manage Promotions</a>
+    <a href="manageUsers.jsp">Manage Users</a>
     <a href="index.html">Logout</a>
   </div>
 
