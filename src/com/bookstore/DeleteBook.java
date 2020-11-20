@@ -37,7 +37,7 @@ public class DeleteBook extends HttpServlet {
 			Statement st = con.createStatement();
 			
 			String query = "DELETE FROM author WHERE book_id = " + bookID;
-			System.out.println(query);
+			
 			
 			PreparedStatement ps = con.prepareStatement(query);
 			ps.executeUpdate();
