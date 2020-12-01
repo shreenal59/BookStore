@@ -48,14 +48,14 @@ insert into Customer (customer_id, user_id, email_address, phone_number, status)
 	values (3002, 'user2', 'bb@abc.com', '7517315223', 'A'); 
   
 
-insert into Address ( addess_id, customer_id, street, city, state, zip, address_type)
-	values (6001, 3001, '123 Avenue', 'Duluth', 'GA', 30074, 'B');
-insert into Address ( addess_id, customer_id, street, city, state, zip, address_type)
-	values (6002, 3001, '123 Fifth Avenue', 'Duluth', 'GA', 30074, 'S');
-insert into Address ( addess_id, customer_id, street, city, state, zip, address_type)
-	values (6003, 3002, '982 Main Street', 'Cumming', 'GA', 30041, 'B');
-insert into Address ( addess_id, customer_id, street, city, state, zip, address_type)
-	values (6004, 3002, '450 ACrter Road', 'Cumming', 'GA', 30041, 'S');	
+insert into Address ( customer_id, street, city, state, zip, address_type)
+	values ( 3001, '123 Avenue', 'Duluth', 'GA', 30074, 'B');
+insert into Address ( customer_id, street, city, state, zip, address_type)
+	values ( 3001, '123 Fifth Avenue', 'Duluth', 'GA', 30074, 'S');
+insert into Address ( customer_id, street, city, state, zip, address_type)
+	values ( 3002, '982 Main Street', 'Cumming', 'GA', 30041, 'B');
+insert into Address ( customer_id, street, city, state, zip, address_type)
+	values ( 3002, '450 ACrter Road', 'Cumming', 'GA', 30041, 'S');	
  
 
 insert into Payment_Card ( card_id, customer_id, card_number, expiration_date, card_type)

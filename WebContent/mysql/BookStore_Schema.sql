@@ -94,14 +94,13 @@ ENGINE = InnoDB;
 -- Table `bookstore`.`Address`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bookstore`.`Address` (
-  `addess_id` INT NOT NULL,
+  `addess_id` INT NOT NULL auto_increment Primary Key,
   `customer_id` INT NOT NULL,
   `street` VARCHAR(45) NOT NULL,
   `city` VARCHAR(45) NOT NULL,
   `state` VARCHAR(45) NOT NULL,
   `zip` INT NOT NULL,
   `address_type` VARCHAR(10) NOT NULL,
-  PRIMARY KEY (`addess_id`),
   INDEX `fk_Address_Customer1_idx` (`customer_id` ASC) VISIBLE,
   INDEX `fk_Address_address_type1_idx` (`address_type` ASC) VISIBLE,
   CONSTRAINT `fk_Address_Customer1`
@@ -296,7 +295,7 @@ CREATE TABLE IF NOT EXISTS `bookstore`.`Cart` (
   `customer_id` INT NOT NULL,
   `book_id` INT NOT NULL,
   `quantity` INT NULL,
-  PRIMARY KEY (`customer_id`),
+  PRIMARY KEY (`customer_id`, `book_id`),
   INDEX `fk_Cart_Book1_idx` (`book_id` ASC) VISIBLE,
   INDEX `fk_Cart_Customer1_idx` (`customer_id` ASC) VISIBLE,
   CONSTRAINT `fk_Cart_Book1`
