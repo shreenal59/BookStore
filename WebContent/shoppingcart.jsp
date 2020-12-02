@@ -96,7 +96,7 @@
       </div>
 
        <div class="container" >
-        <form action="./checkout1.html">
+        <form action="./checkout1.jsp">
           <button type="submit" class="button_2" style="float: right;">Continue to Checkout</button>
         </form>
       </div>

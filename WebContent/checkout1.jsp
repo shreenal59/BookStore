@@ -258,7 +258,7 @@
         <label for="tax">Estimated Sales Tax:</label>$<%= tax %> <br>
         <label for="cvc">Order Total:</label>$<%= orderTotal %> <br>
         <br>
-        <form action="./shoppingcart.html">
+        <form action="./shoppingcart.jsp">
           <button type="submit" class="button_2">Edit or View Cart</button>
         </form>
       </div>
