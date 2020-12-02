@@ -342,6 +342,30 @@ CREATE TABLE IF NOT EXISTS `bookstore`.`Author` (
 ENGINE = InnoDB;
 
 
+-- -----------------------------------------------------
+-- Table `bookstore`.`Rating`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `bookstore`.`Rating` (
+  `customer_id` INT NOT NULL,
+  `book_id` INT NOT NULL,
+  `numeric_rating` INT NOT NULL,
+  PRIMARY KEY (`customer_id`, `book_id`),
+  INDEX `fk_Rating_Book1_idx` (`book_id` ASC) VISIBLE,
+  INDEX `fk_Rating_Customer1_idx` (`customer_id` ASC) VISIBLE,
+  CONSTRAINT `fk_Rating_Book1`
+    FOREIGN KEY (`book_id`)
+    REFERENCES `bookstore`.`Book` (`book_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Rating_Customer1`
+    FOREIGN KEY (`customer_id`)
+    REFERENCES `bookstore`.`Customer` (`customer_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
