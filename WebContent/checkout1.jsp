@@ -85,7 +85,9 @@
 	  String cityS = "";
 	  String stateS = "";
 	  String zipS = "";
+	  String shipping = "false";
 	  while (rs2.next()) {
+		  shipping = "true";
 		  streetS = rs2.getString(3);
 		  cityS = rs2.getString(4);
 		  stateS = rs2.getString(5);
@@ -99,7 +101,9 @@
 	  String cityB = "";
 	  String stateB = "";
 	  String zipB = "";
+	  String billing = "false";
 	  while (rs3.next()) {
+		  billing = "true";
 		  streetB = rs3.getString(3);
 		  cityB = rs3.getString(4);
 		  stateB = rs3.getString(5);
@@ -120,7 +124,9 @@
 	  String cardNum = "";
 	  String exDate = "";
 	  String cardType = "";
+	  String card = "false";
 	  while(rs5.next()){
+		  card = "true";
 		  cardNum = rs5.getString(1);
 		  exDate = rs5.getString(2);
 		  cardType = rs5.getString(3);
@@ -136,12 +142,41 @@
 		  cardType = "Visa";
 	  }
 	  
+	  String query6 = "SELECT * FROM bookstore.cart JOIN bookstore.inventory USING (book_id) WHERE customer_id = '"+cusId+"';";
+	  Statement st6 = con.createStatement();
+	  ResultSet rs6 =st6.executeQuery(query6);
+	  String empty="true";
+	  Double total = 0.0;
+	  int quantity = 1;
+	  while(rs6.next()){
+		  empty = "false";
+		  quantity = rs6.getInt(3);
+		  total = total + quantity*(rs6.getDouble(5));
+	  }
 	  
+	  if(empty.equals("true")){
+		  %>
+		  	<script>
+				alert("Cart is empty, Add books to cart to continue checkout process.");
+				window.location = "index.html";
+		  	</script>
+		  	
+		  <% 
+	  }
 	  
+	  double tax = 0.05 * total;
+	  double orderTotal = total + tax; 
 	  
-	  	
+	  DecimalFormat df = new DecimalFormat("#.##");      
+	  tax = Double.valueOf(df.format(tax));
+	  orderTotal = Double.valueOf(df.format(orderTotal));
+	  total = Double.valueOf(df.format(total));
+
+	  
   
   %>
+  
+  
 
   
 
@@ -151,13 +186,10 @@
         <div id="main_con">
         <h1 class="page-title">Personal Information</h1><br>
         
-        <form action="checkout2.jsp" id="address">
+        <form action="checkout1" method="POST" id="address">
           <fieldset>
             <legend><h3>Billing Address</h3></legend>
-            <label for="f_name">First Name: </label>
-            <input type="text" name="f_name" placeholder="Enter First Name here" value="<%= fname %>" required><br><br>
-            <label for="l_name">Last Name: </label>
-            <input type="text" name="l_name" placeholder="Enter Last Name here" value="<%= lname %>" required><br><br>
+            
             <label for="address">Street Address: </label>
             <input type="text" name="streetB" placeholder="Enter Street Address here" value="<%= streetB %>" required><br><br>
             <label for="city">City: </label>
@@ -166,17 +198,18 @@
             <input type="text" name="zipB" placeholder="Enter Zip Code here" value="<%= zipB %>" required><br><br>
             <label for="state">State: </label>
             <input type="text" name="stateB" placeholder="Enter State Name here" value="<%= stateS %>" required><br><br>
-            <label for="number">Phone Number: </label>
-            <input type="text" name="number" placeholder="Enter Phone Number here" value="<%= phone %>"><br><br>
+            <input type="hidden" name="uname" value="<%= uname %>">
+            <input type="hidden" name="cusId" value="<%= cusId %>">
+            <input type="hidden" name="shipping" value="<%= shipping %>">
+            <input type="hidden" name="billing" value="<%= billing %>">
+            <input type="hidden" name="card" value="<%= card %>">
+
           </fieldset>
             <br>
           
           <fieldset>
             <legend><h3>Shipping Address</h3></legend>
-            <label for="f_name">First Name: </label>
-            <input type="text" name="f_name" placeholder="Enter First Name here" value="<%= fname %>" required><br><br>
-            <label for="l_name">Last Name: </label>
-            <input type="text" name="l_name" placeholder="Enter Last Name here" value="<%= lname %>" required><br><br>
+            
             <label for="address">Street Address: </label>
             <input type="text" name="streetS" placeholder="Enter Street Address here" value="<%= streetS %>" required><br><br>
             <label for="city">City: </label>
@@ -185,8 +218,7 @@
             <input type="text" name="zipS" placeholder="Enter Zip Code here" value="<%= zipS %>" required><br><br>
             <label for="state">State: </label>
             <input type="text" name="stateS" placeholder="Enter State Name here" value="<%= stateS %>" required><br><br>
-            <label for="number">Phone Number: </label>
-            <input type="text" name="number" placeholder="Enter Phone Number here" value="<%= phone %>"><br><br>
+            
           </fieldset>
           <br>
 
@@ -203,8 +235,18 @@
               <option value="M">Mastercard</option>
               <option value="V">Visa</option>
             </select>
+            <br>
           </fieldset>
-          <br><br>
+          <br>
+          
+          <fieldset>
+            <legend><h3>Promotion Information</h3></legend>
+            <label for="promo">Promo code:</label>
+            <input type="text" name="promo" placeholder="Enter Promo Code">
+            <br>
+          </fieldset>
+          <br>
+          <br>
 
           <button type="submit" class="button_2">Continue to Checkout</button>
         </form>
@@ -212,9 +254,9 @@
 
       <div id="side_bar" class="dark">
         <h3 style="margin-left: 3em;">Order Summary</h3>
-        <label for="cost">Original Price:</label>$32.97 <br>
-        <label for="tax">Estimated Sales Tax:</label>$2.3 <br>
-        <label for="cvc">Order Total:</label>$35.27 <br>
+        <label for="cost">Original Price:</label>$<%= total %> <br>
+        <label for="tax">Estimated Sales Tax:</label>$<%= tax %> <br>
+        <label for="cvc">Order Total:</label>$<%= orderTotal %> <br>
         <br>
         <form action="./shoppingcart.html">
           <button type="submit" class="button_2">Edit or View Cart</button>
@@ -226,7 +268,7 @@
   </section>
 
   <script>
-    function setSelectedIndex(select, value) {
+    function SelectedIndex(select, value) {
       for ( var i = 0; i < select.options.length; i++ ) {
         if ( select.options[i].text == value ) {
             select.options[i].selected = true;
@@ -235,7 +277,7 @@
       }
     }
 
-    setSelectedIndex(document.getElementById('cardType'), "<%= cardType %>");
+    SelectedIndex(document.getElementById('cardType'), "<%= cardType %>");
   </script>
 
   <footer>

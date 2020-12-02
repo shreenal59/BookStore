@@ -201,14 +201,13 @@ ENGINE = InnoDB;
 -- Table `bookstore`.`Order`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bookstore`.`Order` (
-  `order_id` INT NOT NULL,
+  `order_id` INT NOT NULL auto_increment Primary Key,
   `customer_id` INT NOT NULL,
   `promotion_id` INT NULL,
   `card_id` INT NOT NULL,
   `date_created` DATE NOT NULL,
   `date_shipped` DATE NULL,
   `amount` DECIMAL(10,2) NULL,
-  PRIMARY KEY (`order_id`),
   INDEX `fk_Order_Customer1_idx` (`customer_id` ASC) VISIBLE,
   INDEX `fk_Order_Promotion1_idx` (`promotion_id` ASC) VISIBLE,
   INDEX `fk_Order_PaymentCard1_idx` (`card_id` ASC) VISIBLE,
@@ -268,11 +267,10 @@ ENGINE = InnoDB;
 -- Table `bookstore`.`Order_Item`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bookstore`.`Order_Item` (
-  `order_item_id` INT NOT NULL,
+  `order_item_id` INT NOT NULL auto_increment Primary Key,
   `order_id` INT NOT NULL,
   `book_id` INT NOT NULL,
   `quantity` INT NULL,
-  PRIMARY KEY (`order_item_id`),
   INDEX `fk_OrderItems_Order1_idx` (`order_id` ASC) VISIBLE,
   INDEX `fk_OrderItems_Book1_idx` (`book_id` ASC) VISIBLE,
   CONSTRAINT `fk_OrderItems_Order1`
