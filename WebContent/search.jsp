@@ -72,8 +72,8 @@
 	    	String text2 = request.getParameter("order");
 	    	String query = "";
 	        Class.forName("com.mysql.jdbc.Driver");
-	    	//Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/bookstore","root","4122");
-	    	Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Bookstore","root","lkjhlkjh");
+	    	Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/bookstore","root","4122");
+	    	//Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Bookstore","root","lkjhlkjh");
 	    	if (text == null || text.equals("")) {
 	        	query = "SELECT * FROM bookstore.book, bookstore.author, bookstore.inventory WHERE book.book_id = author.book_id AND inventory.book_id = author.book_id ORDER BY "+text2+";";
 	    	} else {
