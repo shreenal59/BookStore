@@ -62,6 +62,8 @@ CREATE TABLE IF NOT EXISTS `bookstore`.`Customer` (
   `email_address` VARCHAR(45) NULL,
   `phone_number` VARCHAR(15) NULL,
   `status` VARCHAR(10) NOT NULL,
+  `verification_code` VARCHAR(15) NULL,
+  `subscription` VARCHAR(1) DEFAULT '0',
   PRIMARY KEY (`customer_id`),
   INDEX `fk_Customer_CustomerStatus_idx` (`status` ASC) VISIBLE,
   INDEX `fk_Customer_User1_idx` (`user_id` ASC) VISIBLE,
