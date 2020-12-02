@@ -241,7 +241,7 @@
         <label for="cvc">Final Total:</label>$<%= finalPrice %> <br>
         
       <br>
-      <form action="./shoppingcart.html">
+      <form action="./shoppingcart.jsp">
         <button type="submit" class="button_2">Edit or View Cart</button>
       </form>
     </div>
