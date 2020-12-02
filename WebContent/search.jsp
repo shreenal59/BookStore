@@ -17,6 +17,8 @@
 <script src="scripts.js"></script>
 </head>
 
+
+
 <body>
   <header>
     <div class="container">
@@ -59,26 +61,6 @@
         }
   </script>
 
-
-<%
-  	/*String text = request.getParameter("search");
-	String text2 = request.getParameter("order");
-	System.out.println(text2);
-	String query = "";
-    Class.forName("com.mysql.jdbc.Driver");
-	//Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/bookstore","root","4122");
-	Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Bookstore","root","lkjhlkjh");
-	if (text == null || text.equals("")) {
-    	query = "SELECT * FROM bookstore.book, bookstore.author, bookstore.inventory WHERE book.book_id = author.book_id AND inventory.book_id = author.book_id ORDER BY book.title;";
-	} else {
-		query = "SELECT * FROM bookstore.book, bookstore.author, bookstore.inventory WHERE book.book_id = author.book_id AND inventory.book_id = author.book_id AND (author.first_name LIKE '%"+text+"%' OR author.last_name LIKE '%"+text+"%' OR book.title LIKE '%"+text+"%') ORDER BY author.last_name;";
-	}
-	Statement st = con.createStatement();
-	ResultSet rs =st.executeQuery(query);*/
-	
-  
-  
-  %>
     <section id="main">
       
       <div class="container">
@@ -90,8 +72,8 @@
 	    	String text2 = request.getParameter("order");
 	    	String query = "";
 	        Class.forName("com.mysql.jdbc.Driver");
-	    	Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/bookstore","root","4122");
-	    	//Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Bookstore","root","lkjhlkjh");
+	    	//Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/bookstore","root","4122");
+	    	Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Bookstore","root","lkjhlkjh");
 	    	if (text == null || text.equals("")) {
 	        	query = "SELECT * FROM bookstore.book, bookstore.author, bookstore.inventory WHERE book.book_id = author.book_id AND inventory.book_id = author.book_id ORDER BY "+text2+";";
 	    	} else {
@@ -101,7 +83,8 @@
 	    	ResultSet rs =st.executeQuery(query);
 	      	while (rs.next()) { %>
         <div class="item">
-        
+        <form action="AddToCart" method="post">
+        <input type="hidden" name="bookID" value="<%=rs.getString(1)%>">
           <div class="cover">
             <img src="./img/books/default.jpg">
           </div>
@@ -116,6 +99,13 @@
           <div class="price">
             <p><%= "$" + rs.getString(14) %></p>
           </div>
+          <div class="submit">
+          	
+          		<input type="number" min="1" step="1" name="quantity" oninput="validity.valid||(value='');" required>
+          		<input type="submit" value="Add to Cart" name="add">
+          	
+          </div>
+          </form>
         </div> 
         <%} %>
       </div>
