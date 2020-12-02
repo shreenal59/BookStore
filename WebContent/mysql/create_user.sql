@@ -5,7 +5,7 @@
 	It also checks if the enterd email-id has already been used. In that case, it returns an error EMAIL_EXISTS.
 */
 
-CREATE FUNCTION create_user (fName varchar(45), lName varchar(45), email varchar(45), passwd varchar(45), phoneNo varchar(45) ) RETURNS varchar(45) CHARSET utf8
+CREATE FUNCTION create_user (fName varchar(45), lName varchar(45), email varchar(45), passwd varchar(45), phoneNo varchar(45), verifyCode varchar(15) ) RETURNS varchar(45) CHARSET utf8
     DETERMINISTIC
 BEGIN
     DECLARE returnString VARCHAR(45) DEFAULT 'EMAIL_EXISTS';
@@ -32,8 +32,8 @@ BEGIN
 
         SELECT max(customer_id) + 1 into new_customer_id from customer;
 
-        insert into customer(customer_id, user_id, email_address, phone_number, status)
-            values(new_customer_id, new_user_id, email, phoneNo, 'I');
+        insert into customer(customer_id, user_id, email_address, phone_number, status, verification_code)
+            values(new_customer_id, new_user_id, email, phoneNo, 'I', verifyCode);
 
         SET returnString = new_user_id;
     ELSE
