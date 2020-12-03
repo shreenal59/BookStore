@@ -89,7 +89,11 @@
             <img src="./img/books/default.jpg">
           </div>
           <div class="description">
-          	<%
+          	
+            <p><%=rs.getString(4) + " by " + rs.getString(11) + ", " + rs.getString(10)%></p>
+          </div>
+          <div class="rating">
+          <%
           		double rating = 0;
           		int count = 0;
           		String rate = "";
@@ -111,8 +115,9 @@
           		System.out.println(" " + rate);
           		
           	%>
-            <p><%=rs.getString(4) + " by " + rs.getString(11) + ", " + rs.getString(10) + " : " + rate%></p>
+          	<p><%=rate%><p>
           </div>
+          
           <div class="quantity">
             <p>
               <%=rs.getString(13) + " in Stock" %>
