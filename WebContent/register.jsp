@@ -37,7 +37,7 @@
         		<option value="book.category">Category</option>
         	</select>
           	<button type="submit" class="search_button" >Search</button>
-          </form></li>
+          </form></li> 
         </ul>
       </nav>
     </div>
@@ -68,7 +68,7 @@
         <label for="psw-repeat" class="reg-label"><b>Repeat Password</b></label>
         <input type="password" placeholder="Repeat Password *" name="psw-repeat" id="psw-repeat" required>
         
-        <!-- <label for="address" class="reg-label"><b>Address Information</b></label>
+         <label for="address" class="reg-label"><b>Address Information</b></label>
         <input type="text" placeholder="Enter Street Name" name="street" id="street">
         <input type="text" placeholder="Enter City Name" name="city" id="city">
         <input type="text" placeholder="Enter Zip Code" name="zip" id="zip">
@@ -79,7 +79,7 @@
         <input type="text" placeholder="Enter Credit/Debit Card Number" name="ccnum" id="ccnum" maxlength="16">
         <input type="text" placeholder="Enter 3-Digit CVC" name="cvc" id="cvc" maxlength="3">
         <input type="text" placeholder="Enter Expiration Date (MM/YY)" name="expDate" id="expDate">
-        <input type="text" placeholder="Enter Name on Card" name="ccname" id="ccname"> -->
+        <input type="text" placeholder="Enter Name on Card" name="ccname" id="ccname"> 
         
         <hr>
 
