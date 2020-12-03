@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Types;
+import java.util.Random;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.AddressException;
@@ -38,21 +39,24 @@ public class Register extends HttpServlet {
 		String pass = request.getParameter("psw");
 		String phone = request.getParameter("phone");
 		pass = "aes_encrypt('" + pass + "', '4050')";
+		String code = getCode();
 
-		/* String street = request.getParameter("street");
+		String street = request.getParameter("street");
 		String city = request.getParameter("city");
-		String state = request.getParameter("State");
+		String state = request.getParameter("state");
 		String zip = request.getParameter("zip");
 
 		String ccnum = request.getParameter("ccnum");
 		String cvc = request.getParameter("cvc");
 		String expDate = request.getParameter("expDate");
-		String ccname = request.getParameter("ccname"); */
+		String ccname = request.getParameter("ccname"); 
 
 		try {
 
 			Class.forName("com.mysql.jdbc.Driver");
 			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/bookstore", "root", "4122");
+//			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Bookstore", "root", "lkjhlkjh");
+
 			Statement st = con.createStatement();
 			ResultSet rsE = st.executeQuery("SELECT * from Customer where email_address='" + email + "'");
 
@@ -64,7 +68,7 @@ public class Register extends HttpServlet {
 
 			if (duplicate == null) {
 
-				CallableStatement cs = con.prepareCall("{? = call create_user(?,?,?,?,?)}");
+				CallableStatement cs = con.prepareCall("{? = call create_user(?,?,?,?,?,?)}");
 
 				cs.registerOutParameter(1, Types.VARCHAR);
 				cs.setString(2, nameF);
@@ -72,6 +76,7 @@ public class Register extends HttpServlet {
 				cs.setString(4, email);
 				cs.setString(5, pass);
 				cs.setString(6, phone);
+				cs.setString(7, code);
 				cs.execute();
 				String uId = cs.getString(1);
 
@@ -99,9 +104,10 @@ public class Register extends HttpServlet {
 				psc.setString(3, email);
 				psc.setString(4, phone);
 
-				/* PreparedStatement psa = con.prepareStatement(
+				
+				PreparedStatement psa = con.prepareStatement(
 						"insert into Address (addess_id, customer_id, street, city, state, zip, address_type)\r\n"
-								+ "values (?, ?, ?, ?, ?, ?, ?)");
+								+ "values (?, ?, ?, ?, ?, ?, 'S')");
 
 				
 				Statement st1 = con.createStatement();
@@ -117,12 +123,15 @@ public class Register extends HttpServlet {
 				
 				psa.setInt(2, addCusId1);
 				psa.setString(3, street);
-				psa.setString(4, city);
+				psa.setString(4, city );
 				psa.setString(5, state);
 				psa.setString(6, zip);
-				psa.setString(7, "'S'");
 				
-
+				if(street.equals("") || city.equals("") || state.equals("") || zip.equals("")) {
+					
+				} else {
+					psa.executeUpdate();
+				}
 				PreparedStatement pscc = con.prepareStatement(
 						"insert into Payment_Card (card_id, customer_id, card_number, expiration_date, card_type)\r\n"
 								+ "values (?, ?, ?, ?, ?)");
@@ -140,12 +149,14 @@ public class Register extends HttpServlet {
 				pscc.setInt(2, addCusId2);
 				pscc.setString(3, ccnum);
 				pscc.setString(4, expDate);
-				pscc.setString(5, getCardType(ccnum)); */
-
-				//ps.executeUpdate();
-				//psc.executeUpdate();
-				//psa.executeUpdate();
-				//pscc.executeUpdate();
+				pscc.setString(5, getCardType(ccnum)); 
+				
+				if (ccnum.equals("") || expDate.equals("")) {
+					
+				} else {
+					pscc.executeUpdate();
+				}
+				
 
 			} else {
 				test = false;
@@ -153,7 +164,7 @@ public class Register extends HttpServlet {
 				out.println(
 						"alert('This email is already in the database; please try again with a different email address.');");
 				out.println("</script>");
-				RequestDispatcher rd = request.getRequestDispatcher("registration.jsp");
+				RequestDispatcher rd = request.getRequestDispatcher("register.jsp");
 				rd.include(request, response);
 			}
 
@@ -161,15 +172,18 @@ public class Register extends HttpServlet {
 			e.printStackTrace();
 		}
 
-		if (test = true) {
+		if (test == true) {
 			String host = "smtp.gmail.com";
 			String port = "587";
 			String emailId = "bookstore9c@gmail.com";
 			String password = "Bookpassword9C";
 			String toAddress = email;
 			String subject = "Thank You For Registering With Us!";
-			String message = "Thank you for registering with our Bookstore. You now have access to our site!";
+			 
 
+			
+			String message = "Thank you for registering with our Bookstore. Your code is:" + code;
+			
 			try {
 				EmailUtility.sendEmail(host, port, emailId, password, toAddress, subject, message);
 			} catch (AddressException e) {
@@ -189,20 +203,43 @@ public class Register extends HttpServlet {
 	public String getCardType(String ccnum) {
 
 		String type = "";
-		if (ccnum.charAt(0) == '3') {
-			type = "'A'";
+		if(ccnum != null && !ccnum.equals("")) {
+			if (ccnum.charAt(0) == '3') {
+				type = "A";
+			}
+			if (ccnum.charAt(0) == '4') {
+				type = "V";
+			}
+			if (ccnum.charAt(0) == '5') {
+				type = "M";
+			}
+			if (ccnum.charAt(0) == '6') {
+				type = "D";
+			}
 		}
-		if (ccnum.charAt(0) == '4') {
-			type = "'V'";
-		}
-		if (ccnum.charAt(0) == '5') {
-			type = "'M'";
-		}
-		if (ccnum.charAt(0) == '6') {
-			type = "'D'";
-		}
-
 		return type;
 
 	}
+	
+	public String getCode() {
+		int leftLimit = 97; // letter 'a'
+	    int rightLimit = 122; // letter 'z'
+	    int targetStringLength = 6;
+	    Random random = new Random();
+	    StringBuilder buffer = new StringBuilder(targetStringLength);
+	    for (int i = 0; i < targetStringLength; i++) {
+	        int randomLimitedInt = leftLimit + (int) 
+	          (random.nextFloat() * (rightLimit - leftLimit + 1));
+	        buffer.append((char) randomLimitedInt);
+	    }
+	    String generatedString = buffer.toString();
+
+	    System.out.println(generatedString);
+	    
+	   
+	    
+	    
+	    return generatedString;
+	}
+	
 }
