@@ -28,7 +28,8 @@ public class EditProfile extends HttpServlet{
 		String street = request.getParameter("street");
 		String city = request.getParameter("city");
 		String state = request.getParameter("state");
-		int zip = Integer.parseInt(request.getParameter("zip")); 
+		int zip = 0;
+		zip = Integer.parseInt(request.getParameter("zip")); 
 			
 		String cardNum = request.getParameter("card-number");
 		Date expirationDate = null;
@@ -36,6 +37,17 @@ public class EditProfile extends HttpServlet{
 			expirationDate = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("expiration-date"));
 		} catch (ParseException e1) {
 			e1.printStackTrace();
+		}
+		
+		if(firstName.equals(null) || lastName.equals(null) || ePassword.equals(null)
+				|| ePassword.equals(null) || password.equals(null) || password2.equals(null)
+				|| phone.equals(null) || street.equals(null) || city.equals(null) || state.equals(null)
+				|| expirationDate == null || cardNum.equals(null)) {
+			out.println("<script>");
+        	out.println("alert('One or more required fields empty or zip code is invalid, please try again.');");
+        	out.println("<script>");
+        	
+        	response.sendRedirect("profile.jsp");
 		}
 		
 		String[] subscription = request.getParameterValues("subscription");
@@ -59,12 +71,9 @@ public class EditProfile extends HttpServlet{
             String checkPass = "";
             while(rs.next()) {
             	checkPass = rs.getString(1);
-            	System.out.println(checkPass);
             }
             
             //check for same password and correct current password
-            System.out.println(ePassword.equals(checkPass));
-            System.out.println(cardNum);
             if(password.equals(password2) && ePassword.equals(checkPass)) {
             
             	//Gets customer_id for use
@@ -85,10 +94,18 @@ public class EditProfile extends HttpServlet{
             	stmt1.setString(4, userID);
             	int i = stmt1.executeUpdate();
             	
-            	//Update Customer table in db(phone number and email)
-            	PreparedStatement stmt2 = con.prepareStatement("UPDATE customer set phone_number=? WHERE customer_id=?");
+            	//Update Customer table in db(phone number and subscription)
+            	int subValue = 0;
+            	if(subscription == null) {
+            		subValue = 0;
+            	}
+            	else {
+            		subValue = 1;
+            	}
+            	PreparedStatement stmt2 = con.prepareStatement("UPDATE customer set phone_number=?,subscription=? WHERE customer_id=?");
             	stmt2.setString(1,phone);
-            	stmt2.setInt(2, customerID);
+            	stmt2.setInt(2, subValue);
+            	stmt2.setInt(3, customerID);
             	int j = stmt2.executeUpdate();
             	
             	//Update Address
@@ -101,7 +118,6 @@ public class EditProfile extends HttpServlet{
             	int k = stmt3.executeUpdate();
             	
             	//Update Payment Card
-            	System.out.println(cardNum);
             	java.sql.Date sqlExpDate = new java.sql.Date(expirationDate.getTime());
             	PreparedStatement stmt4 = con.prepareStatement("UPDATE Payment_Card SET card_number=AES_ENCRYPT(?,'4050'),expiration_date=? WHERE customer_id=?");
             	stmt4.setString(1,cardNum);
@@ -109,22 +125,22 @@ public class EditProfile extends HttpServlet{
             	stmt4.setInt(3, customerID);
             	int l = stmt4.executeUpdate();
             	
-            	//Update subscription
             	
             	
             	out.println("<script>");
             	out.println("alert('Successfully Updated');");
             	out.println("<script>");
             	
-            	RequestDispatcher rd = request.getRequestDispatcher("index.html");
-				rd.include(request, response);	
+            	//RequestDispatcher rd = request.getRequestDispatcher("profile.jsp");
+				//rd.include(request, response);
+            	response.sendRedirect("profile.jsp");
+            	 
             }
             else {
             	out.println("<script>");
             	out.println("alert('Existing password incorrect or mismatch passwords, Try again');");
             	out.println("<script>");
-            	RequestDispatcher rd = request.getRequestDispatcher("index.html");
-				rd.include(request, response);	
+            	response.sendRedirect("profile.jsp");
             }
         }	catch(SQLException | ClassNotFoundException e) {
         	e.printStackTrace();
