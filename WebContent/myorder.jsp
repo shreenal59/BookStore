@@ -135,6 +135,7 @@ content="bookstore, shopping, ecommerce, books, shop">
             </form>
         	</div>
         </div>
+        <hr>
 		<%} %>
     
     </div>
