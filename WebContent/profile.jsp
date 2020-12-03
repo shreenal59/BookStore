@@ -13,7 +13,7 @@
     content="bookstore, shopping, ecommerce, books, shop">
   <meta name="author" content="Avery Davis">
   <title>BookStore | Home</title>
-  <link rel="stylesheet" href="./css/stylesheet.css">
+	<link rel="stylesheet" href="./css/stylesheet.css">
   <script src="scripts.js"></script>
 </head>
 
@@ -28,7 +28,7 @@
           <li><a href="index.html">Home</a></li>
           <li><a href="login.html" id = "log">Login</a></li>
           <li><a href="register.jsp" id = "register">Register</a></li>
-          <li><a href="shoppingcart.html">Shopping Cart</a></li>
+          <li><a href="shoppingcart.jsp">Shopping Cart</a></li>
           <li><a href="profile.jsp" id="session" class="current">Profile</a></li>
           <li><input type="text" placeholder="Search..."></li>
           <li><button type="submit" class="search_button" onclick="window.location.href='search.html';">Search</button>
@@ -54,10 +54,10 @@
     <section id="sec-reg-log">
         <div class="container">
           <main id="main-reg-log">
+          <form action="EditProfile" method="post">
           <article id="art-reg-log">
             <h1 class="page-title">Edit Profile - You must be logged in to do so</h1>    
             <hr>
-            <form action="EditProfile" method="post">
             <%
         		Class.forName("com.mysql.jdbc.Driver");
         		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/bookstore","root","4122");
@@ -143,7 +143,7 @@
             <label for="subscription"> Opt in for subscription</label>
             
             <hr>                
-            <button type="submit" class="submitbtn" onclick="window.location.href='profile.jsp';">Submit Changes</button>
+            <button type="submit" class="submitbtn" >Submit Changes</button>
            </form>
           </article>
         </main>
