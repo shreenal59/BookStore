@@ -95,7 +95,7 @@ header a:hover{
   .item .cover{
     float:left;
     text-align: center;
-    width: 10%;
+    width: 5%;
     padding: 10px;
   }
 
@@ -114,22 +114,35 @@ header a:hover{
   .item .quantity{
     float:left;
     text-align: center;
-    width:30%;
+    width:10%;
     padding:10px;
   }
-
 
   .item .detail{
     float:left;
     text-align: center;
-    width:13%;
+    width:10%;
+    padding:10px;
+  }
+  
+  .item .rating{
+  	float:left;
+    text-align: left;
+    width:5%;
     padding:10px;
   }
 
   .item .button{
     float:left;
     text-align: center;
-    width:8%;
+    width:10%;
+    padding:10px;
+  }
+  
+  .item .submit{
+    float:left;
+    text-align: center;
+    width:10%;
     padding:10px;
   }
 
