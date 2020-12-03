@@ -89,7 +89,29 @@
             <img src="./img/books/default.jpg">
           </div>
           <div class="description">
-            <p><%=rs.getString(4) + " by " + rs.getString(11) + ", " + rs.getString(10)%></p>
+          	<%
+          		double rating = 0;
+          		int count = 0;
+          		String rate = "";
+          		String query2 = "SELECT * FROM bookstore.rating WHERE book_id = " + rs.getInt(1);
+          		Statement st2 = con.createStatement();
+          		ResultSet rs2 = st2.executeQuery(query2);
+          		while (rs2.next()) {
+          			if (rs2.getString(3) != null) {
+          				rating += rs2.getInt(3);
+          				count++;
+          			}
+          		}
+          		
+          		if (count == 0) {
+          			rate = "-/5.0";
+          		} else {
+          			rate = rating/count + "/5.0";
+          		}
+          		System.out.println(" " + rate);
+          		
+          	%>
+            <p><%=rs.getString(4) + " by " + rs.getString(11) + ", " + rs.getString(10) + " : " + rate%></p>
           </div>
           <div class="quantity">
             <p>
