@@ -28,7 +28,7 @@
           <li><a href="index.html">Home</a></li>
           <li><a href="login.html" id = "log">Login</a></li>
           <li><a href="register.jsp" id = "register">Register</a></li>
-          <li><a href="shoppingcart.html" class="current">Shopping Cart</a></li>
+          <li><a href="shoppingcart.jsp" class="current">Shopping Cart</a></li>
           <li><a href="profile.html" id="session">Profile</a></li>
           <li><form action="search.jsp">
           	<input type="text" name="search" placeholder="Search...">
@@ -63,8 +63,8 @@
       	
       	<% 
       	Class.forName("com.mysql.jdbc.Driver");
-    	Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/bookstore","root","4122");
-    	//Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Bookstore","root","lkjhlkjh");
+    	//Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/bookstore","root","4122");
+    	Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Bookstore","root","lkjhlkjh");
     	Statement st = con.createStatement();
     	ResultSet rs = st.executeQuery("select * from cart, book, author, inventory "+
     	"where cart.book_id = book.book_id and cart.book_id = author.book_id and cart.book_id = inventory.book_id;");
@@ -72,21 +72,28 @@
     	while (rs.next()) {
       	%>
       	<div class="item">
-      		<form action="DeleteFromCart" method="post">
-      			<input type="hidden" name="bookID" value="<%=rs.getString(2)%>">
+      		
+      			
       			<div class="cover">
       				<img src="./img/books/default.jpg">
       			</div>
       			<div class="description">
             		<p><%=rs.getString(7) + " by " + rs.getString(14) + ", " + rs.getString(13)%></p>
           		</div>
+          		<form action="UpdateQuantityInCart" method="post">
           		<div class="quantity">
-              		<input type="number" min="1" step="1" value="<%=rs.getString(3) %>" name="quantity" oninput="validity.valid||(value='');" required>
+              		<input type="number" min="1" step="1" value="<%=rs.getString(3) %>" name="quantity" oninput="validity.valid||(value='');" required><br>
+              		<input type="hidden" name="bookID" value="<%=rs.getString(2)%>">
+              		<input type="submit" value="Update Quantity" name="update">
+
           		</div>
+          		</form>
           		<div class="price">
 		            <p><%= "$" + rs.getString(17) + " each" %></p>
 		        </div>
+	          	<form action="DeleteFromCart" method="post">
 	          	<div class="submit">
+	          		<input type="hidden" name="bookID" value="<%=rs.getString(2)%>">
 	        		<input type="submit" value="Delete" name="delete">
 	          	
 	          	</div>
@@ -96,7 +103,7 @@
       </div>
 
        <div class="container" >
-        <form action="./checkout1.jsp">
+        <form action="./checkout1.html">
           <button type="submit" class="button_2" style="float: right;">Continue to Checkout</button>
         </form>
       </div>
