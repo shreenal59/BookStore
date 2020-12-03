@@ -20,80 +20,106 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/AddToCart")
 public class AddToCart extends HttpServlet{
-	
-	 public void doPost(HttpServletRequest request, HttpServletResponse response)
-		      throws ServletException, IOException {
-		Cookie cookie = null;
-	    Cookie[] cookies = null;
-	    cookies = request.getCookies();
-	    response.setContentType("text/html");
-	    int cusID = 0;
-	    String user="";
 
-	    
-	    int bookID = Integer.parseInt(request.getParameter("bookID"));
-	    int quantity = Integer.parseInt(request.getParameter("quantity"));
-	    System.out.println(bookID);
-	    PrintWriter out = response.getWriter();
-	    try {
+	public void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		Cookie cookie = null;
+		Cookie[] cookies = null;
+		cookies = request.getCookies();
+		response.setContentType("text/html");
+		int cusID = 0;
+		String user="";
+		boolean test = true;
+
+
+		int bookID = Integer.parseInt(request.getParameter("bookID"));
+		int quantity = Integer.parseInt(request.getParameter("quantity"));
+		System.out.println(bookID);
+		PrintWriter out = response.getWriter();
+		try {
 
 			Class.forName("com.mysql.jdbc.Driver");
 			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/bookstore", "root", "4122");
-//			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Bookstore", "root", "lkjhlkjh");
+			//Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Bookstore", "root", "lkjhlkjh");
 
 			Statement st = con.createStatement();
-	    
-	      for (int i = 0; i < cookies.length; i++) {
-	    	  System.out.println("NAME: " + cookies[i].getName());
-	    	  System.out.println("VALUE: " + cookies[i].getValue());
-	      }
-	      
-	      
-	      if( cookies != null && cookies.length > 1) {
-	 	    
-	         for (int i = 0; i < cookies.length; i++) {
-	        	 if (cookies[i].getName().equals("uname")) {
-	        		 user = cookies[i].getValue();
-	        		 break;
-	        	 }
-	         }
-	        
-	         
-	         PreparedStatement psID = con.prepareStatement(
-	        		 "select customer_id from customer where user_id = '"+user+"'");
-	         System.out.println( "select customer_id from customer where user_id = '"+user+"'");
-	         
-	         ResultSet rs = psID.executeQuery();
-	         while (rs.next()) {
-	        	 cusID = rs.getInt(1);
-	         }
-	         
-	         PreparedStatement ps = con.prepareStatement(
-						"insert into Cart (customer_id, book_id, quantity)\r\n"
-								+ "	values (?, ?, ?);");
-	         
-	         System.out.println(cusID + " " + bookID + " " + quantity);
-	         ps.setInt(1, cusID);
-	         ps.setInt(2, bookID);
-	         ps.setInt(3, quantity);
-	         
-	         ps.executeUpdate();	         
-	         
-	         RequestDispatcher rd = request.getRequestDispatcher("shoppingcart.jsp");
-		 		rd.include(request, response);
-	         
-	      } else {
-	    	  System.out.println(cookies[0].getName());
-	  	    RequestDispatcher rd = request.getRequestDispatcher("login.html");
-	  		rd.include(request, response);
-	      }
+
+			for (int i = 0; i < cookies.length; i++) {
+				System.out.println("NAME: " + cookies[i].getName());
+				System.out.println("VALUE: " + cookies[i].getValue());
+			}
+
+
+			if( cookies != null && cookies.length > 1) {
+
+				for (int i = 0; i < cookies.length; i++) {
+					if (cookies[i].getName().equals("uname")) {
+						user = cookies[i].getValue();
+						break;
+					}
+				}
+
+
+				PreparedStatement psID = con.prepareStatement(
+						"select customer_id from customer where user_id = '"+user+"'");
+				//System.out.println( "select customer_id from customer where user_id = '"+user+"'");
+
+				ResultSet rs = psID.executeQuery();
+				while (rs.next()) {
+					cusID = rs.getInt(1);
+				}
+
+				PreparedStatement psRep = con.prepareStatement(
+						"SELECT book_id FROM cart WHERE customer_id =" + cusID);
+				System.out.println("SELECT book_id FROM cart WHERE customer_id =" + cusID);
+
+				ResultSet rs2 = psRep.executeQuery();
+
+				
+				
+				while (rs2.next()) {
+					System.out.println(rs2.getInt(1));
+					if (rs2.getInt(1) == bookID) {
+						System.out.println("IN WHILE IN IF");
+						out.println("<script>");
+						out.println(
+								"alert('Item already in cart.');");
+						out.println("</script>");
+						test = false;
+						RequestDispatcher rd = request.getRequestDispatcher("shoppingcart.jsp");
+						rd.include(request, response);
+						break;
+					} 
+				}
+
+				if (test == true) {
+					PreparedStatement ps = con.prepareStatement(
+							"insert into Cart (customer_id, book_id, quantity)\r\n"
+									+ "	values (?, ?, ?);");
+
+					System.out.println(cusID + " " + bookID + " " + quantity);
+					ps.setInt(1, cusID);
+					ps.setInt(2, bookID);
+					ps.setInt(3, quantity);
+
+					ps.executeUpdate();	         
+
+					RequestDispatcher rd = request.getRequestDispatcher("shoppingcart.jsp");
+					rd.include(request, response);
+				}
+
+			} else {
+				System.out.println(cookies[0].getName());
+				RequestDispatcher rd = request.getRequestDispatcher("login.html");
+				rd.include(request, response);
+			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
-	    
-//	    RequestDispatcher rd = request.getRequestDispatcher("shoppingcart.jsp");
-//		rd.include(request, response);
-	 }
+
+		//	    RequestDispatcher rd = request.getRequestDispatcher("shoppingcart.jsp");
+		//		rd.include(request, response);
+	}
 }
