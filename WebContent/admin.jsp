@@ -22,7 +22,6 @@
 	Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/bookstore","root","4122");
     String userQuery = "SELECT user_id, first_name, last_name, User_Type FROM bookstore.user;";
 	Statement st = con.createStatement();
-	ResultSet rs =st.executeQuery(userQuery);
 	Statement st2 = con.createStatement();
 	
   %>
@@ -120,8 +119,30 @@
           </tr>
         </table>
       -->
+<%
+	String query = "SELECT promo_code, percentage,start_date,end_date FROM promotion;";
+	ResultSet rs = st.executeQuery(query);
+%>
+	<table>
+  	<tr>
+  		<th>Promo Code</th>
+  		<th>Percentage</th>
+  		<th>Start Date</th>
+  		<th>End Date</th>
+  		<% while(rs.next()) { 
+    	
+   		 %>
+   		 <tr>
+   		 	<td> <%= rs.getString(1) %> </td>
+   		 	<td> <%= rs.getInt(2) %> </td>
+   		 	<td> <%= rs.getDate(3) %> </td>
+   		 	<td> <%= rs.getDate(4) %> </td>
+   		 </tr>
+   		 <% 
+			 }%>
       </div>
     </div>
+    
     <div class="tables" id="usersTable">
       <h4>Users</h4>
       <div style="overflow-x:auto;">
@@ -133,7 +154,9 @@
           <th>User Type</th>
           <th>Customer Status</th>
         </tr>
-        <% while(rs.next()) { 
+        <% 
+    	rs =st.executeQuery(userQuery);
+        while(rs.next()) { 
         	String userID = rs.getString(1);
         %>
         <tr>
