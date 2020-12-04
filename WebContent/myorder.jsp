@@ -114,8 +114,9 @@ content="bookstore, shopping, ecommerce, books, shop">
           		<p2><%="Item Quantity: " + rs.getInt(11) + ", Item Price: " + rs.getString(22)%></p2>
           	</div>
           	<div class="item">
-          	<form action="?">
-            <div class="button">  
+            <div class="button"> 
+	    <form action="AddRating" method="post">
+	    <input type="hidden" name="bookID" value="<%=rs.getString(10)%>">	    
                 <select name="rate" id="rate" class="button_3" style="margin-top: 16px;">
                     <option value="1">1</option>
                     <option value="2">2</option>
