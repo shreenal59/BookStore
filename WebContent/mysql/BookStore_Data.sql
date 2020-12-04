@@ -2,6 +2,7 @@
 
 insert into user_type (code, description) values ( 'A', 'Admin' );
 insert into user_type (code, description) values ( 'C', 'Customer');
+insert into user_type (code, description) values ( 'E', 'Employee');
 
 insert into Customer_Status (code, description) values ( 'A', 'Active' ); 
 insert into Customer_Status (code, description) values ( 'I', 'Inactive' ); 
