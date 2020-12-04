@@ -29,10 +29,18 @@
           <li><a href="login.html" id = "log">Login</a></li>
           <li><a href="register.jsp" id = "register">Register</a></li>
           <li><a href="shoppingcart.jsp">Shopping Cart</a></li>
-          <li><a href="profile.jsp" id="session" class="current">Profile</a></li>
-          <li><input type="text" placeholder="Search..."></li>
-          <li><button type="submit" class="search_button" onclick="window.location.href='search.html';">Search</button>
-          </li>
+          <li><a href="profile.html" id="session">Profile</a></li>
+          <li><form action="search.jsp">
+          	<input type="text" name="search" placeholder="Search...">
+          	<label for="order">Sort: </label>
+          	<select name="order" id="order">
+        		<option value="book.title">Title</option>
+        		<option value="author.last_name">Author</option>
+        		<option value="book.isbn">ISBN</option>
+        		<option value="book.category">Category</option>
+        	</select>
+          	<button type="submit" class="search_button" >Search</button>
+          </form></li>
         </ul>
       </nav>
     </div>
