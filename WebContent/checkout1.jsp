@@ -27,9 +27,9 @@
           <li><a href="index.html">Home</a></li>
           <li><a href="login.html" id = "log">Login</a></li>
           <li><a href="register.jsp" id = "register">Register</a></li>
-          <li><a href="shoppingcart.jsp">Shopping Cart</a></li>
-          <li><a href="profile.html" id="session">Profile</a></li>
-          <li><form action="search.jsp">
+          <li class="current"><a href="shoppingcart.jsp">Shopping Cart</a></li>
+          <li><a href="profile.jsp" id="session">Profile</a></li>
+         <li><form action="search.jsp">
           	<input type="text" name="search" placeholder="Search...">
           	<label for="order">Sort: </label>
           	<select name="order" id="order">
