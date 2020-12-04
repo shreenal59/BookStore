@@ -17,6 +17,17 @@ content="bookstore, shopping, ecommerce, books, shop">
 <script src="scripts.js"></script>
 </head>
 
+<script>
+        var cookie = getCookie("uname");
+        if (cookie == null) {
+        	window.location = "login.html";
+        } else {
+          document.getElementById('session').innerHTML = cookie;
+          document.getElementById('log').innerHTML = "Log Out";
+          document.getElementById("register").innerHTML = "";
+        }
+  </script>
+
 <body>
 <header>
     <div class="container">
