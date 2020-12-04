@@ -90,12 +90,14 @@ content="bookstore, shopping, ecommerce, books, shop">
     		" and bookstore.order_item.book_id=bookstore.inventory.book_id;");
     		
     		while(rs.next()){
+    			rs.getString("cover_picture");
     	%>
     		<div class="box">
+    		<div class="item">
 			<div class="cover">
-      				<img src="./img/books/rs.getString(19)">
+      				<img src="./img/books/<%=rs.getString("cover_picture")%>">
       		</div>
-      		
+      		</div>
       		<div class="description">
             	<p><%="Item Ordered: " + rs.getString(15) + " " + rs.getString(16) + " Edition by " 
       			+ rs.getString(26) + ", " + rs.getString(25)%></p>
@@ -111,7 +113,7 @@ content="bookstore, shopping, ecommerce, books, shop">
           	<div class="price">
           		<p2><%="Item Quantity: " + rs.getInt(11) + ", Item Price: " + rs.getString(22)%></p2>
           	</div>
-          	
+          	<div class="item">
           	<form action="?">
             <div class="button">  
                 <select name="rate" id="rate" class="button_3" style="margin-top: 16px;">
@@ -131,7 +133,7 @@ content="bookstore, shopping, ecommerce, books, shop">
             <form action="AddToCart" method = "post">  
             	<input type="hidden" name="bookID" value="<%=rs.getString(10)%>">
             	<input type="hidden" step="1" value="<%=rs.getString(11) %>" 
-            	name="quantity" oninput="validity.valid||(value='');" required><br>
+            	name="quantity" oninput="validity.valid||(value='');" required>
                 <p><button class="button_3">Reorder</button></p>
             </form>
 			</div>
@@ -141,6 +143,7 @@ content="bookstore, shopping, ecommerce, books, shop">
             <form action="./return.html">
                 <p><button class="button_3">Return</button></p>
             </form>
+        	</div>
         	</div>
         </div>
         <hr>
