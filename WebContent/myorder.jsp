@@ -85,7 +85,7 @@ content="bookstore, shopping, ecommerce, books, shop">
     	%>
     		<div class="box">
 			<div class="cover">
-      				<img src="./img/books/default.jpg">
+      				<img src="./img/books/rs.getString(19)">
       		</div>
       		
       		<div class="description">
