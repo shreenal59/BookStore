@@ -81,12 +81,13 @@
 	    	}
 	    	Statement st = con.createStatement();
 	    	ResultSet rs =st.executeQuery(query);
-	      	while (rs.next() && rs.getInt(13) != 0) { %>
+	      	while (rs.next() && rs.getInt(13) != 0) { 
+	      	System.out.print(rs.getString(8)); %>
         <div class="item">
         <form action="AddToCart" method="post">
         <input type="hidden" name="bookID" value="<%=rs.getString(1)%>">
           <div class="cover">
-            <img src="./img/books/default.jpg">
+            <img src="./img/books/<%=rs.getString(8)%>">
           </div>
           <div class="description">
           	
@@ -112,7 +113,6 @@
           		} else {
           			rate = rating/count + "/5.0";
           		}
-          		System.out.println(" " + rate);
           		
           	%>
           	<p><%=rate%><p>
