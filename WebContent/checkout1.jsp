@@ -233,7 +233,7 @@
           <fieldset>
             <legend><h3>Payment Information</h3></legend>
             <label for="card">Credit Card No:</label>
-            <input type="text" name="cardNo" placeholder="Enter 16 Digit No" value="<%= cardNum %>" required><br><br>
+            <input type="text" name="cardNo" placeholder="Enter 16 Digit No" value="<%= cardNum %>" maxlength="16" required><br><br>
             <label for="Exp_Date">Exp Date:</label>
             <input type="date" name="Exp_date" value="<%= exDate %>" required><br><br>
             <label for="cardTypr">CardType:</label>

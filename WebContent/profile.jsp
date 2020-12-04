@@ -153,7 +153,7 @@
             <input type="number" value="<%=zip %>" name="zip" id="zip" required>
             
             <label for="card-number" class="reg-label"><b>Card Number</b></label>
-            <input type="text" placeholder="Enter 16-Digit Card Number" name="card-number" id="card-number" required>
+            <input type="text" placeholder="Enter 16-Digit Card Number" name="card-number" id="card-number" maxlength="16" required>
             
             <label for="expiration-date" class="reg-label"><b>Card Expiration Date</b></label>
             <input type="date" placeholder="Enter Exipration Date" name="expiration-date" id="expiration-date" required>

@@ -107,7 +107,7 @@ public class Register extends HttpServlet {
 				
 				PreparedStatement psa = con.prepareStatement(
 						"insert into Address (addess_id, customer_id, street, city, state, zip, address_type)\r\n"
-								+ "values (?, ?, ?, ?, ?, ?, 'S')");
+								+ "values (?, ?, ?, ?, ?, ?, 'B')");
 
 				
 				Statement st1 = con.createStatement();
