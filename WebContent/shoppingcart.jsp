@@ -75,7 +75,7 @@
       		
       			
       			<div class="cover">
-      				<img src="./img/books/default.jpg">
+      				<img src="./img/books/<%=rs.getString(11)%>">
       			</div>
       			<div class="description">
             		<p><%=rs.getString(7) + " by " + rs.getString(14) + ", " + rs.getString(13)%></p>
